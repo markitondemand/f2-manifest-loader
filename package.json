@@ -1,0 +1,32 @@
+{
+  "name": "f2manifests-loader",
+  "version": "0.1.0",
+  "description": "webpack module for F2 that generates app manifests",
+  "main": "lib/index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "build": "babel src/ --out-dir lib/"
+  },
+  "keywords": [
+    "webpack",
+    "loader",
+    "module",
+    "f2"
+  ],
+  "author": "polinn.chia",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "eslint": "^4.16.0",
+    "prettier": "^1.10.2"
+  },
+  "dependencies": {
+    "loader-utils": "^1.1.0",
+    "mkdirp": "^0.5.1"
+  },
+  "peerDependencies": {
+    "webpack": ">=2"
+  }
+}
