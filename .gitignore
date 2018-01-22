@@ -1,1 +1,7 @@
 node_modules
+# Tests output
+tests/output
+coverage
+.nyc_output
+# NPM pack output
+*.tgz

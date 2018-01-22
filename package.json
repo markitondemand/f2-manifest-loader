@@ -1,32 +1,60 @@
 {
-  "name": "f2manifests-loader",
-  "version": "0.1.0",
+  "name": "f2-manifest-loader",
+  "version": "0.1.1",
   "description": "webpack module for F2 that generates app manifests",
   "main": "lib/index.js",
   "directories": {
     "test": "tests"
   },
   "scripts": {
-    "build": "babel src/ --out-dir lib/"
+    "build": "babel src/ --out-dir lib/",
+    "watch": "babel src/ --out-dir lib/ -w",
+    "format": "prettier --write  \"src/**/*.js\" \"examples/**/*.js\"  \"!examples/*/dist/**/*.js\" \"tests/**/*.js\" \"!tests/output/**\" \"webpack.test.js\"",
+    "webpack": "rimraf tests/output -r && node webpack.test.js",
+    "test": "nyc ava --verbose",
+    "report": "nyc report --reporter=html",
+    "precommit": "npm run build && npm run format"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/markitondemand/f2-manifest-loader"
   },
   "keywords": [
     "webpack",
     "loader",
     "module",
-    "f2"
+    "openf2"
   ],
-  "author": "polinn.chia",
-  "license": "ISC",
+  "license": "Apache-2.0",
+  "author": "Markit On Demand, Inc",
   "devDependencies": {
+    "ava": "^0.24.0",
     "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "coveralls": "^3.0.0",
     "eslint": "^4.16.0",
-    "prettier": "^1.10.2"
+    "glob": "^7.1.2",
+    "nyc": "^11.4.1",
+    "prettier": "1.10.2",
+    "rimraf": "^2.6.2",
+    "webpack": "^2.0.0"
   },
   "dependencies": {
     "loader-utils": "^1.1.0",
-    "mkdirp": "^0.5.1"
+    "mkdirp": "^0.5.1",
+    "mustache": "^2.3.0"
   },
   "peerDependencies": {
     "webpack": ">=2"
+  },
+  "ava": {
+    "files": [
+      "tests/*.js"
+    ],
+    "require": [
+      "babel-core/register"
+    ],
+    "babel": "inherit"
   }
 }
