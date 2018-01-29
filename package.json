@@ -10,7 +10,6 @@
     "build": "babel src/ --out-dir lib/",
     "watch": "babel src/ --out-dir lib/ -w",
     "format": "prettier --write  \"src/**/*.js\" \"examples/**/*.js\"  \"!examples/*/dist/**/*.js\" \"tests/**/*.js\" \"!tests/output/**\" \"webpack.test.js\"",
-    "webpack": "rimraf tests/output -r && node webpack.test.js",
     "test": "nyc ava --verbose",
     "report": "nyc report --reporter=html",
     "precommit": "npm run build && npm run format"
@@ -56,5 +55,10 @@
       "babel-core/register"
     ],
     "babel": "inherit"
+  },
+  "nyc": {
+    "exclude": [
+      "tests"
+    ]
   }
 }

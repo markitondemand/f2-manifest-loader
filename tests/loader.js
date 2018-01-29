@@ -55,7 +55,7 @@ test.cb.before('setup', t => {
 });
 
 test.cb.after('cleanup', t => {
-	dirHelper.remove(__dirname, 'output', () => {
+	dirHelper.remove(__dirname, 'output/loader', () => {
 		t.end();
 	});
 });
@@ -104,7 +104,7 @@ test.cb('manifests use forwardslashes for paths', t => {
 	t.end();
 });
 
-test.cb('manifests include the right number of common assets', t => {
+test.cb('manifests include the right number of common assets when provided', t => {
 	const regex = /F2_jsonpCallback_com_open_f2_test_app\(([\s\S]+)\)/m;
 	const match = data.match(regex);
 	t.not(match, null);
@@ -126,6 +126,3 @@ test.cb('appclasses with "f2manifest-loader-ignore" are not processed', t => {
 
 test.todo('app.html defaults to a self-closing tag with kebab-cased appid');
 test.todo('manifests include the appclass correctly');
-test.todo('loader works with multiple entry points');
-test.todo('loader works with single entry point');
-test.todo('options.appclass interpolation works');

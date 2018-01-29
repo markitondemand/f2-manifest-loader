@@ -16,7 +16,7 @@ const config = {
 				loader: loader,
 				exclude: /node_modules/,
 				options: {
-					dest: path.join(__dirname, 'tests/output/manifests'),
+					dest: 1234,
 					appclass: path.join(__dirname, 'tests/output/[name].js'),
 					commonScripts: ['whee/whoo.js', 'la/deedah.js'],
 					commonStyles: ['bootshizzle.css', 'heroes/of/magic.css']
