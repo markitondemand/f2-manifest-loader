@@ -1,6 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
-var loader = path.join(__dirname, '../../lib/index.js');
+
 // grab environment variable; failsafe to production
 var env = process.env.NODE_ENV || 'production';
 var basePath;
@@ -28,7 +28,7 @@ const config = {
 		loaders: [
 			{
 				test: /\.jsx?/,
-				loader: loader,
+				loader: 'f2-manifest-loader',
 				exclude: /node_modules/,
 				options: {
 					dest: path.join(__dirname, 'dist/manifests'),

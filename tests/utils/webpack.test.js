@@ -1,13 +1,13 @@
 let webpack = require('webpack');
 let path = require('path');
 let rimraf = require('rimraf');
-const loader = path.join(__dirname, './lib/index.js');
+const loader = path.resolve(__dirname, '../../lib/index.js');
 
 const config = {
-	entry: { default: __dirname + '/tests/fixtures/default.js' },
+	entry: { default: path.resolve(__dirname, '../fixtures/default.js') },
 	output: {
 		filename: '[name].js',
-		path: __dirname + '/tests/output'
+		path: path.resolve(__dirname, '../output')
 	},
 	module: {
 		loaders: [
@@ -16,8 +16,8 @@ const config = {
 				loader: loader,
 				exclude: /node_modules/,
 				options: {
-					dest: 1234,
-					appclass: path.join(__dirname, 'tests/output/[name].js'),
+					dest: path.resolve(__dirname, '../output'),
+					appclass: path.resolve(__dirname, '../output/[name].js'),
 					commonScripts: ['whee/whoo.js', 'la/deedah.js'],
 					commonStyles: ['bootshizzle.css', 'heroes/of/magic.css']
 				}

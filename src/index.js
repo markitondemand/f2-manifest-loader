@@ -90,7 +90,7 @@ module.exports = function(source) {
 		});
 	}
 
-	// Write out the manifest
+	// Write out the manifests
 	const templateOptions = {
 		appid,
 		scripts: scripts.join(',\n\t\t'),
@@ -107,6 +107,11 @@ module.exports = function(source) {
 	const output = mustache.render(template, templateOptions);
 	const outputPath = path.join(normalizePath(loaderOptions.dest), `${appid}_manifest.js`);
 	fs.writeFileSync(outputPath, output);
+
+	const templateJson = fs.readFileSync(path.join(__dirname, './templateJson.js'), 'utf8');
+	const outputJson = mustache.render(templateJson, templateOptions);
+	const outputJsonPath = path.join(normalizePath(loaderOptions.dest), `${appid}_manifest.json`);
+	fs.writeFileSync(outputJsonPath, outputJson);
 
 	return source;
 };

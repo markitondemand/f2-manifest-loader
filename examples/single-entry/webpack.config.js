@@ -1,6 +1,5 @@
 var path = require('path');
 var webpack = require('webpack');
-const loader = path.join(__dirname, '../../lib/index.js');
 
 const config = {
 	entry: path.join(__dirname, 'src/app.appclass.js'),
@@ -12,7 +11,7 @@ const config = {
 		loaders: [
 			{
 				test: /\.jsx?/,
-				loader: loader,
+				loader: 'f2-manifest-loader',
 				exclude: /node_modules/,
 				options: {
 					dest: path.join(__dirname, 'dist/manifests'),

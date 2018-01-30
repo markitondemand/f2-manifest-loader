@@ -63,12 +63,12 @@ test.cb.after('cleanup', t => {
 test.cb('the correct number of manifests are generated', t => {
 	fs.readdir(path.join(__dirname, 'output/loader/manifests'), (err, files) => {
 		t.is(err, null);
-		t.is(files.length, 3);
+		t.is(files.length, 6);
 		t.end();
 	});
 });
 
-test.cb('manifests are valid', t => {
+test.cb('js manifests are valid', t => {
 	const data = fs.readFileSync(
 		path.join(__dirname, 'output/loader/manifests/com_open_f2_test_app_manifest.js'),
 		'utf8'
@@ -78,6 +78,20 @@ test.cb('manifests are valid', t => {
 	t.not(match, null);
 	try {
 		const json = JSON.parse(match[1]);
+		t.pass();
+	} catch (e) {
+		t.fail();
+	}
+	t.end();
+});
+
+test.cb('json manifests are valid', t => {
+	const data = fs.readFileSync(
+		path.join(__dirname, 'output/loader/manifests/com_open_f2_test_app_manifest.json'),
+		'utf8'
+	);
+	try {
+		const json = JSON.parse(data);
 		t.pass();
 	} catch (e) {
 		t.fail();

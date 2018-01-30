@@ -4,6 +4,9 @@
 
 This package enables the automatic generation of app manifests using F2 and [webpack](https://github.com/webpack/webpack)
 
+* Produces JS and JSON manifests 
+* Scripts and styles automatically have a cachebuster appended
+
 ## Usage
 
 ```javascript
@@ -28,11 +31,30 @@ loaders: [
 ]
 ```
 
+Produces:
+
+```javascript
+// dist/manifests/com_open_f2_app_one_manifest.js
+F2_jsonpCallback_com_open_f2_app_one({
+    "inlineScripts":[window.myObject = {hello: "world"}],
+    "scripts":[
+        "http:/my-cdn.com/bootstrap.js?v=1517269612205",
+        "http:/my-server.com/dist/my-app.js?v=1517269612205"
+    ],
+    "styles":[
+        "http:/my-cdn.com/nice-styles.css?v=1517269612205"
+    ],
+    "apps":[{
+        "html":"<my-app class="my-class"></my-app>"
+    }]
+})
+```
+
 ## `options`
 
 These options are available on top of the standard Webpack loader options:
 
-* `dest`: String (**required**, default: `null`) - path to destination folder for app manifests
+* `dest`: String (**required**, default: `null`) - path to destination folder for app manifests. All manifests are generated as `<app_id>_manifest.js`
 * `appclass`: String (**required**, default: `dist/[name].js`) - path to the built appclass
 * `commonScripts`: [String] - array of common scripts to be included before the appclass
 * `inlineScripts`: [String] - array of inline scripts to be included
