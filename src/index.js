@@ -29,7 +29,7 @@ function normalizePath(str) {
 		throw new TypeError('Expected string');
 	}
 
-	return str.replace(/[\\\/]+/g, '/');
+	return str.replace(/[\\\/]/g, '/');
 }
 
 F2ManifestsLoaderError.prototype = Object.create(Error.prototype);
@@ -79,7 +79,7 @@ module.exports = function(source) {
 		content: source
 	});
 	appclass = normalizePath(appclass);
-	scripts.push(`"${normalizePath(appclass)}?v=${cacheBuster}"`);
+	scripts.push(`"${appclass}?v=${cacheBuster}"`);
 
 	// Load styles
 	const styles = [];

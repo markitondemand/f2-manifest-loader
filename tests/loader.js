@@ -23,7 +23,7 @@ const config = {
 				exclude: /node_modules/,
 				options: {
 					dest: path.join(__dirname, 'output/loader/manifests'),
-					commonScripts: ['s1.js', 's2,js'],
+					commonScripts: ['s1.js', 'http://test.com/s2.js'],
 					commonStyles: ['s1.css', 's2.css']
 				}
 			}
