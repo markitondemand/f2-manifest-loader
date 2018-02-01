@@ -1,4 +1,5 @@
 var path = require('path');
+var url = require('url');
 var webpack = require('webpack');
 
 const config = {
@@ -15,7 +16,7 @@ const config = {
 				exclude: /node_modules/,
 				options: {
 					dest: path.join(__dirname, 'dist/manifests'),
-					appclass: path.join('http://my-server.com', 'dist/my-precious-bundle.js')
+					appclass: url.resolve('http://my-server.com', 'dist/my-precious-bundle.js')
 				}
 			}
 		]

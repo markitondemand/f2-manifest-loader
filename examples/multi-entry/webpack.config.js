@@ -1,5 +1,6 @@
 var path = require('path');
 var glob = require('glob');
+var url = require('url');
 var webpack = require('webpack');
 
 // glob all appclasses
@@ -32,7 +33,7 @@ const config = {
 				exclude: /node_modules/,
 				options: {
 					dest: path.join(__dirname, 'dist/manifests'),
-					appclass: path.join('http://my-server.com', 'dist/[name].bundle.js')
+					appclass: url.resolve('http://my-server.com', 'dist/[name].bundle.js')
 				}
 			}
 		]

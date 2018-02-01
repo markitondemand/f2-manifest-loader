@@ -6,3 +6,5 @@ tests
 examples
 .prettierrc
 .babelrc
+coverage
+.nyc_output

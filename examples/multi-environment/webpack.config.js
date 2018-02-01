@@ -1,6 +1,6 @@
 var path = require('path');
+var url = require('url');
 var webpack = require('webpack');
-
 // grab environment variable; failsafe to production
 var env = process.env.NODE_ENV || 'production';
 var basePath;
@@ -32,7 +32,7 @@ const config = {
 				exclude: /node_modules/,
 				options: {
 					dest: path.join(__dirname, 'dist/manifests'),
-					appclass: path.join(basePath, 'dist/my-precious-bundle.js')
+					appclass: url.resolve(basePath, 'dist/my-precious-bundle.js')
 				}
 			}
 		]
