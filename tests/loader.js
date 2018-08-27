@@ -23,6 +23,7 @@ const config = {
 				exclude: /node_modules/,
 				options: {
 					dest: path.join(__dirname, 'output/loader/manifests'),
+					styles: ['my-style.css'],
 					commonScripts: ['s1.js', 'http://test.com/s2.js'],
 					commonStyles: ['s1.css', 's2.css']
 				}
@@ -118,13 +119,13 @@ test.cb('manifests use forwardslashes for paths', t => {
 	t.end();
 });
 
-test.cb('manifests include the right number of common assets when provided', t => {
+test.cb('manifests include the right number of assets when provided', t => {
 	const regex = /F2_jsonpCallback_com_open_f2_test_app\(([\s\S]+)\)/m;
 	const match = data.match(regex);
 	t.not(match, null);
 
 	const json = JSON.parse(match[1]);
-	t.is(json.styles.length, 2, '... for styles');
+	t.is(json.styles.length, 3, '... for styles');
 	t.is(json.scripts.length, 3, '... for scripts');
 	t.end();
 });

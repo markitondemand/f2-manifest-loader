@@ -89,6 +89,12 @@ module.exports = function(source) {
 			styles.push(`"${normalizePath(style)}?v=${cacheBuster}"`);
 		});
 	}
+	const appStyles = loaderOptions.styles;
+	if (appStyles && appStyles.length) {
+		appStyles.forEach(style => {
+			styles.push(`"${normalizePath(style)}?v=${cacheBuster}"`);
+		});
+	}
 
 	// Write out the manifests
 	const templateOptions = {
@@ -103,14 +109,16 @@ module.exports = function(source) {
 		mkdirp.sync(normalizePath(loaderOptions.dest));
 	}
 
+	const filename = loaderOptions.filename || `${appid}_manifest`;
+
 	const template = fs.readFileSync(path.join(__dirname, './template.js'), 'utf8');
 	const output = mustache.render(template, templateOptions);
-	const outputPath = path.join(normalizePath(loaderOptions.dest), `${appid}_manifest.js`);
+	const outputPath = path.join(normalizePath(loaderOptions.dest), `${filename}.js`);
 	fs.writeFileSync(outputPath, output);
 
 	const templateJson = fs.readFileSync(path.join(__dirname, './templateJson.js'), 'utf8');
 	const outputJson = mustache.render(templateJson, templateOptions);
-	const outputJsonPath = path.join(normalizePath(loaderOptions.dest), `${appid}_manifest.json`);
+	const outputJsonPath = path.join(normalizePath(loaderOptions.dest), `${filename}.json`);
 	fs.writeFileSync(outputJsonPath, outputJson);
 
 	return source;
