@@ -145,6 +145,38 @@ test.cb('dest throws an error not a string', t => {
 	});
 });
 
+test.cb('filename works', t => {
+	const outputPath = path.join(__dirname, 'output/options/manifests');
+	const config = Object.assign({}, baseConfig, {
+		output: {
+			path: path.join(__dirname, 'output/options')
+		},
+		module: {
+			loaders: [
+				{
+					test: /\.jsx?/,
+					loader: loader,
+					exclude: /node_modules/,
+					options: {
+						filename: 'manifest',
+						dest: outputPath
+					}
+				}
+			]
+		}
+	});
+
+	webpack(config, (err, stats) => {
+		if (err) {
+			t.end(err);
+		}
+
+		t.true(fs.existsSync(path.join(outputPath, 'manifest.js')), 'manifest.js exists');
+		t.true(fs.existsSync(path.join(outputPath, 'manifest.json')), 'manifest.json exists');
+		t.end();
+	});
+});
+
 test.todo('appclass interpolation works');
 
 test.todo('app.html matches markup provided');

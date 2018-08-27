@@ -18,10 +18,15 @@ loaders: [
         include: 'src/appclasses',
         options: {
             dest: path.join(__dirname, 'dist/manifests'),
+            filename: 'manifest',
             appclass: path.join(
                 'http://my-server.com', 
                 'dist/my-app.js'
             ),
+            styles: [path.join(
+                'http://my-server.com', 
+                'dist/my-app.css'
+            )],
             commonScripts: ['http://my-cdn.com/bootstrap.js'],
             commonStyles: ['http://my-cdn.com/nice-styles.css'],
             inlineScripts: ['window.myObject = {hello: "world"}'],
@@ -34,7 +39,7 @@ loaders: [
 Produces:
 
 ```javascript
-// dist/manifests/com_open_f2_app_one_manifest.js
+// dist/manifests/manifest.js
 F2_jsonpCallback_com_open_f2_app_one({
     "inlineScripts":[window.myObject = {hello: "world"}],
     "scripts":[
@@ -42,7 +47,8 @@ F2_jsonpCallback_com_open_f2_app_one({
         "http:/my-server.com/dist/my-app.js?v=1517269612205"
     ],
     "styles":[
-        "http:/my-cdn.com/nice-styles.css?v=1517269612205"
+        "http:/my-cdn.com/nice-styles.css?v=1517269612205",
+        "http:/my-server.com/dist/my-app.css?v=1517269612205"
     ],
     "apps":[{
         "html":"<my-app class="my-class"></my-app>"
@@ -54,9 +60,12 @@ F2_jsonpCallback_com_open_f2_app_one({
 
 These options are available on top of the standard Webpack loader options:
 
-* `dest`: String (**required**, default: `null`) - path to destination folder for app manifests. All manifests are generated as `<app_id>_manifest.js`
+* `dest`: String (**required**, default: `null`) - path to destination folder for app manifests
+* `filename`: String - name of the generated manifest files. Default: `<app_id>_manifest.js(on)`
 * `appclass`: String (**required**, default: `dist/[name].js`) - path to the built appclass
+* `styles`: [String] - array of app styles to be included 
 * `commonScripts`: [String] - array of common scripts to be included before the appclass
+* `commonStyles`: [String] - array of common styles to be included before app styles
 * `inlineScripts`: [String] - array of inline scripts to be included
 * `html`: String (default: `<app-id />` lower-kebab-cased app id as declared in the appclass) - app HTML
 
